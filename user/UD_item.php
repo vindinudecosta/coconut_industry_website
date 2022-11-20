@@ -46,15 +46,7 @@ echo $update_item = update_cart_item();
 
 
 
-?>
 
-
-
-
-
-
-
-<?php
 
 
 function delete_cart_item()
