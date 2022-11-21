@@ -1,3 +1,5 @@
+<?php @session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,12 +38,22 @@
                         <i class="fa-solid fa-circle-user"></i>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
-                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><?php if (isset($_SESSION['admin_username'])) {
+                                    echo "<a class='nav-link fw-bolder dropdown-item ' role='button'  href='../login_registration/user_logout.php' aria-expanded='false'>Logout</a>";
+                                }
+
+                                ?></li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                     </li>
-                    <a class="nav-link  " role="button" href="#" aria-expanded="false" style="margin-left: 0.5rem;"> &nbsp;Hi Admin </a>
+                    <a class="nav-link  " role="button" href="#" aria-expanded="false" style="margin-left: 0.5rem;"> &nbsp;Hi <?php if (!isset($_SESSION['admin_username'])) {
+                                                                                                                                    echo "admin";
+                                                                                                                                } else {
+                                                                                                                                    echo $_SESSION['admin_username'];
+                                                                                                                                }
+
+                                                                                                                                ?> </a>
 
 
 

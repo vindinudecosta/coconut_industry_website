@@ -1,3 +1,52 @@
+<?php include('../includes/connect.php');
+include('../functions/common_functions.php');
+@session_start();
+?>
+
+<?php
+
+if (isset($_POST['admin_login'])) {
+
+
+    $admin_username = $_POST['admin_username'];
+    $admin_password = $_POST['admin_password'];
+    $admin_email = $_POST['admin_email'];
+
+    $select_query = "select * from `admin_info` where `admin_username` = '$admin_username' or `admin_email`='$admin_email'";
+    $results = mysqli_query($con, $select_query);
+    $rows_count = mysqli_num_rows($results);
+    $row_data = mysqli_fetch_assoc($results);
+    $admin_ip = getIPAddress();
+
+
+
+
+    if ($rows_count > 0) {
+        $_SESSION['admin_username'] = $admin_username;
+        if (password_verify($admin_password, $row_data['admin_password'])) {
+
+
+
+            $_SESSION['admin_username'] = $admin_username;
+            echo "<script> alert('login success') </script>";
+            echo "<script> window.open('../admin/dashboard.php','_self') </script>";
+        } else {
+            echo "<script> alert('invalid password') </script>";
+        }
+    } else {
+
+
+        echo "<script> alert('invalid credentials') </script>";
+    }
+}
+?>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +58,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <style>
+        body {
+            overflow: hidden;
+        }
+    </style>
 
 
 </head>
@@ -41,16 +95,21 @@
                             <div class="mb-4">
 
                                 <label for="username" class="form-label fw-bolder">Username</label>
-                                <input type="text" name="user_username" id="username" class="form-control" placeholder="Enter username" autocomplete="off" required="required">
+                                <input type="text" name="admin_username" id="username" class="form-control" placeholder="Enter username" autocomplete="off" required="required">
                             </div>
 
+                            <div class="mb-4">
+
+                                <label for="email" class="form-label fw-bolder">Email</label>
+                                <input type="text" name="admin_email" id="email" class="form-control" placeholder="Enter email" autocomplete="off" required="required">
+                            </div>
 
 
 
                             <div class="mb-4">
 
                                 <label for="password" class="form-label fw-bolder">Password</label>
-                                <input type="password" name="user_password" id="price" class="form-control" placeholder="Enter password" autocomplete="off" required="required">
+                                <input type="password" name="admin_password" id="price" class="form-control" placeholder="Enter password" autocomplete="off" required="required">
                             </div>
 
 
@@ -65,8 +124,8 @@
                     <div class="form-outline text-center pt-3">
 
 
-                        <input type="submit" name="insert_product" class="btn btn-outline-dark mb-3 px-5 fw-bolder" value="Click to login">
-                        <p class="small fw-bold">Dont't have an admin account? <a href="user_registration.php" class="text-success">Register</a></p>
+                        <input type="submit" name="admin_login" class="btn btn-outline-dark mb-3 px-5 fw-bolder" value="Click to login">
+                        <p class="small fw-bold">Dont't have an admin account? <a href="admin_registration.php" class="text-success">Register</a></p>
 
 
 
