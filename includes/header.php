@@ -38,14 +38,15 @@
                         <i class="fa-solid fa-circle-user"></i>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
-                            <li><?php if (!isset($_SESSION['admin_username'])) {
-                                    echo "<a class='dropdown-item'  href='../login_registration/admin_login.php'  style='margin-left: 0.5rem;'> Login</a>";
-                                } else {
-                                    echo "<a class='dropdown-item' href='../login_registration/admin_logout.php'  style='margin-left: 0.5rem;'> Logout</a>";
-                                } ?></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
+                            <?php if (!isset($_SESSION['admin_username'])) {
+                                echo '<li class="dropdown-item" id="link_1"> Login</li>';
+                            } else {
+                                echo '<li class="dropdown-item" id="link_2">Logout</li>';
+                            } ?>
+                    </li>
+                    <li class="dropdown-item" id="link_3"> Login as user</li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
                     </li>
                     <a class="nav-link  " role="button" href="#" aria-expanded="false" style="margin-left: 0.5rem;"> &nbsp;Hi <?php if (!isset($_SESSION['admin_username'])) {
                                                                                                                                     echo "admin";
@@ -65,3 +66,17 @@
 
         </div>
     </header>
+
+
+
+    <script>
+        document.getElementById("link_1").onclick = function() {
+            location.href = "../login_registration/admin_login.php";
+        };
+        document.getElementById("link_2").onclick = function() {
+            location.href = "../login_registration/admin_logout.php";
+        };
+        document.getElementById("link_3").onclick = function() {
+            location.href = "../login_registration/user_login.php";
+        };
+    </script>

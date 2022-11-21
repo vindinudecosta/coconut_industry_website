@@ -1,43 +1,69 @@
 <?php include('../includes/connect.php');
-include('../functions/common_functions.php');
-@session_start();
+//get ip address function 
+function getIPAddress()
+{
+    //whether ip is from the share internet  
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    }
+    //whether ip is from the proxy  
+    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+    //whether ip is from the remote address  
+    else {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+}
+
 ?>
+<?php @session_start(); ?>
 
 <?php
-
-if (isset($_POST['admin_login'])) {
-
-
-    $admin_username = $_POST['admin_username'];
-    $admin_password = $_POST['admin_password'];
-    $admin_email = $_POST['admin_email'];
-
-    $select_query = "select * from `admin_info` where `admin_username` = '$admin_username' or `admin_email`='$admin_email'";
-    $results = mysqli_query($con, $select_query);
-    $rows_count = mysqli_num_rows($results);
-    $row_data = mysqli_fetch_assoc($results);
-    $admin_ip = getIPAddress();
+if (!isset($_SESSION['admin_username'])) {
 
 
 
 
-    if ($rows_count > 0) {
-        $_SESSION['admin_username'] = $admin_username;
-        if (password_verify($admin_password, $row_data['admin_password'])) {
+
+    if (isset($_POST['admin_login'])) {
+
+
+        $admin_username = $_POST['admin_username'];
+        $admin_password = $_POST['admin_password'];
+        $admin_email = $_POST['admin_email'];
+
+        $select_query = "select * from `admin_info` where `admin_username` = '$admin_username' or `admin_email`='$admin_email'";
+        $results = mysqli_query($con, $select_query);
+        $rows_count = mysqli_num_rows($results);
+        $row_data = mysqli_fetch_assoc($results);
+        $admin_ip = getIPAddress();
 
 
 
+
+        if ($rows_count > 0) {
             $_SESSION['admin_username'] = $admin_username;
-            echo "<script> alert('login success') </script>";
-            echo "<script> window.open('../admin/dashboard.php','_self') </script>";
+            if (password_verify($admin_password, $row_data['admin_password'])) {
+
+
+
+                $_SESSION['admin_username'] = $admin_username;
+                echo "<script> alert('login success') </script>";
+                echo "<script> window.open('../admin/dashboard.php','_self') </script>";
+            } else {
+                echo "<script> alert('invalid password') </script>";
+            }
         } else {
-            echo "<script> alert('invalid password') </script>";
+
+
+            echo "<script> alert('invalid credentials') </script>";
         }
-    } else {
-
-
-        echo "<script> alert('invalid credentials') </script>";
     }
+} else {
+    echo "<script> alert('already logged in!') </script>";
+    echo "<script> window.open('../admin/dashboard.php','_self')</script>";
 }
 ?>
 

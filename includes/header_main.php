@@ -47,7 +47,7 @@
                          <i class="fa-solid fa-circle-user"></i>
                          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
-                             <li><a class="dropdown-item" href="#">Action</a></li>
+                             <li class="dropdown-item" id="link_3"> login as admin</li>
                              <li><a class="dropdown-item" href="#">Another action</a></li>
                              <li><a class="dropdown-item" href="#">Something else here</a></li>
                          </ul>
@@ -112,3 +112,9 @@
 
          </div>
      </header>
+
+     <script>
+         document.getElementById("link_3").onclick = function() {
+             location.href = "../login_registration/admin_login.php";
+         };
+     </script>

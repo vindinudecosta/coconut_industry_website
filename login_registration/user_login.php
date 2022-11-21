@@ -5,48 +5,53 @@ include('../functions/common_functions.php');
 
 <?php
 
-if (isset($_POST['user_login'])) {
+
+if (!isset($_SESSION['user_username'])) {
+    if (isset($_POST['user_login'])) {
 
 
-    $user_username = $_POST['user_username'];
-    $user_password = $_POST['user_password'];
-    $user_email = $_POST['user_email'];
+        $user_username = $_POST['user_username'];
+        $user_password = $_POST['user_password'];
+        $user_email = $_POST['user_email'];
 
-    $select_query = "select * from `user_info` where `user_username` = '$user_username' or `user_email`='$user_email'";
-    $results = mysqli_query($con, $select_query);
-    $rows_count = mysqli_num_rows($results);
-    $row_data = mysqli_fetch_assoc($results);
-    $user_ip = getIPAddress();
-
-
-    $select_cart_item = "Select * from `cart_details` where ip_address='$user_ip'";
-    $result_cart = mysqli_query($con, $select_cart_item);
-    $row_count_cart = mysqli_num_rows($result_cart);
-
-    if ($rows_count > 0) {
-        $_SESSION['user_username'] = $user_username;
-        if (password_verify($user_password, $row_data['user_password'])) {
+        $select_query = "select * from `user_info` where `user_username` = '$user_username' or `user_email`='$user_email'";
+        $results = mysqli_query($con, $select_query);
+        $rows_count = mysqli_num_rows($results);
+        $row_data = mysqli_fetch_assoc($results);
+        $user_ip = getIPAddress();
 
 
-            if ($rows_count == 0 or $row_count_cart == 0) {
-                $_SESSION['user_username'] = $user_username;
-                echo "<script> alert('login success') </script>";
-                echo "<script> window.open('../user/main.php','_self') </script>";
+        $select_cart_item = "Select * from `cart_details` where ip_address='$user_ip'";
+        $result_cart = mysqli_query($con, $select_cart_item);
+        $row_count_cart = mysqli_num_rows($result_cart);
+
+        if ($rows_count > 0) {
+            $_SESSION['user_username'] = $user_username;
+            if (password_verify($user_password, $row_data['user_password'])) {
+
+
+                if ($rows_count == 0 or $row_count_cart == 0) {
+                    $_SESSION['user_username'] = $user_username;
+                    echo "<script> alert('login success') </script>";
+                    echo "<script> window.open('../user/main.php','_self') </script>";
+                } else {
+                    $_SESSION['user_username'] = $user_username;
+                    echo "<script> alert('login success') </script>";
+                    echo "<script> window.open('payments.php','_self') </script>";
+                }
             } else {
-                $_SESSION['user_username'] = $user_username;
-                echo "<script> alert('login success') </script>";
-                echo "<script> window.open('payments.php','_self') </script>";
+                echo "<script> alert('invalid password') </script>";
             }
         } else {
-            echo "<script> alert('invalid password') </script>";
+
+
+            echo "<script> alert('invalid credentials') </script>";
         }
-    } else {
-
-
-        echo "<script> alert('invalid credentials') </script>";
     }
+} else {
+    echo "<script> alert('already logged in!') </script>";
+    echo "<script> window.open('../user/main.php','_self')</script>";
 }
-
 
 
 
