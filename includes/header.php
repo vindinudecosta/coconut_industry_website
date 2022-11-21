@@ -1,5 +1,6 @@
 <?php @session_start(); ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CocoMart|Admin</title>
+    <title>CocoMart|User</title>
 
     <!-- Bootstrap css link-->
 
@@ -15,47 +16,55 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
+    <style>
+        .card-img-top {
 
+            width: 100%;
+            object-fit: contain;
+            height: 200px;
+        }
+    </style>
 </head>
 
-<body>
+<body class="bg-light ">
     <!-- navbar -->
     <header>
 
         <div class="container-fluid p-0">
             <nav class="navbar bg-light border-bottom border-success py-lg-2 ">
-                <div class="container-fluid" style="margin-left:3rem;">
+                <div class="container-fluid " style="margin-left:3rem;">
                     <a class="navbar-brand"><img src="../images/logo2.png" alt="" height="30px" width="30px"> COCO-MART</a>
-                    <form class="d-flex" role="search" style="margin-right: 3rem;">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    <form class="d-flex" role="search" style="margin-right: 3rem;" action="../user/search_products.php" method="get">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data">
+
+                        <input type="submit" value="Search" class="btn btn-outline-dark" name="search_data_product">
                     </form>
                 </div>
             </nav>
-            <nav class="navbar navbar-expand-lg bg-light bg-gradient ">
-                <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg bg-light bg-gradient container ">
+                <div class="container-fluid fw-bolder ">
                     <li class="nav-item dropdown navbar-nav" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" style="margin-left: 3.7rem;">
                         <i class="fa-solid fa-circle-user"></i>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
-                            <?php if (!isset($_SESSION['admin_username'])) {
-                                echo '<li class="dropdown-item" id="link_1"> Login</li>';
-                            } else {
-                                echo '<li class="dropdown-item" id="link_2">Logout</li>';
-                            } ?>
+                            <li class="dropdown-item" id="link_3"> login as user</li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
                     </li>
-                    <li class="dropdown-item" id="link_3"> Login as user</li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                    </li>
-                    <a class="nav-link  " role="button" href="#" aria-expanded="false" style="margin-left: 0.5rem;"> &nbsp;Hi <?php if (!isset($_SESSION['admin_username'])) {
-                                                                                                                                    echo "admin";
-                                                                                                                                } else {
-                                                                                                                                    echo $_SESSION['admin_username'];
-                                                                                                                                }
+                    &nbsp;~ Hi <?php if (!isset($_SESSION['admin_username'])) {
+                                    echo "Admin";
+                                } else {
+                                    echo $_SESSION['admin_username'];
+                                }
 
-                                                                                                                                ?> </a>
+                                ?> ~ <?php if (!isset($_SESSION['admin_username'])) {
+                                            echo "<a class='nav-link fw-bolder ' role='button' href='../login_registration/admin_login.php' aria-expanded='false' style='margin-left: 0.5rem;'> Login</a>";
+                                        } else {
+                                            echo "<a class='nav-link fw-bolder ' role='button' href='../login_registration/admin_logout.php' aria-expanded='false' style='margin-left: 0.5rem;'> Logout</a>";
+                                        }
 
+                                        ?>
 
 
 
@@ -67,15 +76,7 @@
         </div>
     </header>
 
-
-
     <script>
-        document.getElementById("link_1").onclick = function() {
-            location.href = "../login_registration/admin_login.php";
-        };
-        document.getElementById("link_2").onclick = function() {
-            location.href = "../login_registration/admin_logout.php";
-        };
         document.getElementById("link_3").onclick = function() {
             location.href = "../login_registration/user_login.php";
         };
