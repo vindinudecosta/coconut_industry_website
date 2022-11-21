@@ -38,11 +38,11 @@
                         <i class="fa-solid fa-circle-user"></i>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
-                            <li><?php if (isset($_SESSION['admin_username'])) {
-                                    echo "<a class='nav-link fw-bolder dropdown-item ' role='button'  href='../login_registration/user_logout.php' aria-expanded='false'>Logout</a>";
-                                }
-
-                                ?></li>
+                            <li><?php if (!isset($_SESSION['admin_username'])) {
+                                    echo "<a class='dropdown-item'  href='../login_registration/admin_login.php'  style='margin-left: 0.5rem;'> Login</a>";
+                                } else {
+                                    echo "<a class='dropdown-item' href='../login_registration/admin_logout.php'  style='margin-left: 0.5rem;'> Logout</a>";
+                                } ?></li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>

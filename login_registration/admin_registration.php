@@ -1,7 +1,7 @@
 <?php include('../includes/connect.php') ?>
 <?php include('../includes/header.php');
 include('../functions/common_functions.php');
-@session_start(); ?>
+?>
 
 
 <?php if (isset($_POST['admin_register'])) {
