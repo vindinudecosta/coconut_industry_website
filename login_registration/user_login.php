@@ -72,11 +72,11 @@ if (!isset($_SESSION['user_username'])) {
 
 </head>
 
-<style>
+<!-- <style>
     body {
         overflow: hidden;
     }
-</style>
+</style> -->
 
 
 <body>
