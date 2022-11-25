@@ -12,7 +12,7 @@
 
     </div>
 
-    <div class="row ">
+    <div class="row  ">
         <form action="" method="post">
             <table class="table  text-center">
                 <thead>
@@ -59,7 +59,7 @@
                             $total += $product_values;
                             echo "<tr>
                             <td class='pt-4 fw-bolder'>  $product_title  </td>
-                            <td><img src='../admin/product_images/$product_image1' alt='' width='80px' height='80px'></td>
+                            <td><img src='../admin/product_images/$product_image1' alt='' width='85px' height='100px'></td>
                             <td class='pt-4'>x $quantities </td>
 
 

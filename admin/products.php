@@ -267,10 +267,10 @@ if (isset($_POST['insert_product'])) {
         <div class="pb-5">
             <h1 class="fw-bolder">View products</h1>
         </div>
-        <div class="row ">
+        <div class="row card">
 
-            <table class="table  text-center">
-                <thead>
+            <table class="table  text-center ">
+                <thead class="card-header">
 
                     <tr>
                         <th> Product Id</th>
