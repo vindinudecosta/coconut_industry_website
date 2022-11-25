@@ -320,7 +320,7 @@ if (isset($_POST['insert_product'])) {
 
                                     <td> $products_id</td>
                                     <td><b>$products_name</b></td>
-                                    <td><img src='../admin/product_images/$products_img1' alt='' width='70px' height='70px'></td>
+                                    <td><img src='../admin/product_images/$products_img1' alt='' width='80px' height='80px'></td>
                                     <td> $products_description </td>
      
                                    <form action='' method ='get'> 
