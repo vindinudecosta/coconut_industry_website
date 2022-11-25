@@ -198,7 +198,7 @@ function get_all_products()
                            
                                 <h5>Rs $product_price</h5><br>
                                 <a href='all_products.php?add_to_cart=$product_id' class='btn btn-outline-dark mt-auto'><i class='fa-solid fa-cart-arrow-down'></i> </a>
-                                <a href='product_detail.php?product_id=$product_id' class='btn btn-outline-success '>View Detail</a>
+                                <a href='product_detail.php?product_id=$product_id' class='btn btn-outline-success'>View Detail</a>
                               </div>
                           </div>
                     </div>";
@@ -322,7 +322,7 @@ function search_products()
 
             echo "  <div class='col-md-3 mb-3 '>
                           <div class='card border border-dark' style='width: 18rem;'>
-                          <img src='../admin/product_images/$product_image1' class='card-img-top p-2' alt='...'>
+                          <img src='../admin/product_images/$product_image1' class='card-img-top p-2' alt='...' >
                               <div class='card-body border-top border-dark'>
                                 <h5 class='card-title fw-bolder'>$product_title</h5><br>
                             

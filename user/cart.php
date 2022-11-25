@@ -77,11 +77,17 @@
 
             </table>
 
+
+
             <div class=" container p-5" style="margin-left:15rem">
                 <div class="d-flex container">
                     <h4 class="px-3">SUB TOTAL: <strong>RS <?php echo $total ?></strong></h4>
                     <a href='all_products.php' class='btn btn-outline-dark mx-3 '> Continue shopping </a>
-                    <a href='../login_registration/checkout.php' class='btn btn-outline-dark mt-auto'> Procced to Checkout </a>
+
+
+
+
+                    <a href='../login_registration/checkout.php' class='btn btn-outline-dark mt-auto'> Place order </a>
                 </div>
             </div>
 

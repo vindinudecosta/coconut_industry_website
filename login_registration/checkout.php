@@ -15,7 +15,7 @@ session_start();
         include('../login_registration/user_login.php');
     } else {
 
-        include('payments.php');
+        include('../user/order.php');
     }
 
     ?>
