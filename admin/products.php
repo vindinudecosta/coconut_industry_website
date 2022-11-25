@@ -262,12 +262,11 @@ if (isset($_POST['insert_product'])) {
 
     </section>
 
-    <div class="container p-5">
-        <div class="pb-5 pt-5">
-            <h1 class="fw-bolder text-center">~ Cart ~</h1>
+    <div class="container ">
 
+        <div class="pb-5">
+            <h1 class="fw-bolder">View products</h1>
         </div>
-
         <div class="row ">
 
             <table class="table  text-center">
@@ -333,7 +332,7 @@ if (isset($_POST['insert_product'])) {
                             }
                         }
                         if (isset($_GET['current_product_id'])) {
-                            $current_product_id = $_GET['cuurent_product_id'];
+                            $current_product_id = $_GET['current_product_id'];
                             $delete_products = "delete from `biproducts` where Biproduct_id=$current_product_id  ";
                             $delete_query = mysqli_query($con, $delete_products);
 
