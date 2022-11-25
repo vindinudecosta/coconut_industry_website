@@ -86,25 +86,48 @@ if (isset($_POST['create_cat'])) {
                                             <th>ID</th>
                                             <th>Name</th>
                                             <th>Description</th>
-                                            <th>Slug</th>
-                                            <th class="text-center">Edit</th>
+
                                             <th class="text-center">Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <?php
+                                        $select_categories = "select * from `categories`";
+                                        $result_categories = mysqli_query($con, $select_categories);
+                                        while ($row_categories = mysqli_fetch_array($result_categories)) {
 
-                                            <td>21</td>
-                                            <td><b>Men clothes</b></td>
-                                            <td>Men clothes</td>
-                                            <td>/men</td>
-                                            <td class="text-center">
-                                                <a><i class="bi bi-brush-fill"></i></a>
-                                            </td>
-                                            <td class="text-center">
-                                                <a> <i class="bi bi-trash"></i></a>
-                                            </td>
-                                        </tr>
+                                            $categories_titles = $row_categories['catergory_name'];
+                                            $categories_id = $row_categories['catergory_id'];
+                                            $categories_descriptions = $row_categories['category_description'];
+
+
+                                            echo " <tr class='text-center'>
+
+                                                     <td>$categories_id</td>
+                                                     <td><b>$categories_titles</b></td>
+                                                     <td>$categories_descriptions</td>
+    
+                                                     <form action='' method ='get'  > 
+                                                        <td class='text-center'>
+                                                          <a href='categories.php?current_categories_id=$categories_id' name='current_categories_id' > <i class='fa-solid fa-trash'></i></a>
+                                                         </td>
+                                                     </form>
+                                                     </tr>";
+
+                                            if (isset($_GET['current_categories_id'])) {
+                                                $current_categories_id = $_GET['current_categories_id'];
+                                                $delete_query = "delete from `categories` where catergory_id = $current_categories_id";
+                                                $result_delete = mysqli_query($con, $delete_query);
+
+                                                echo '<script> window.open("categories.php","_self")  </script>';
+                                            }
+                                        }
+
+
+
+                                        ?>
+
+
 
                                     </tbody>
                                 </table>

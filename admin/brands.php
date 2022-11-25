@@ -1,4 +1,20 @@
 <?php include '../includes/connect.php';
+function getIPAddress()
+{
+    //whether ip is from the share internet  
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    }
+    //whether ip is from the proxy  
+    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+    //whether ip is from the remote address  
+    else {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+}
 
 if (isset($_POST['create_brand'])) {
 
@@ -17,7 +33,7 @@ if (isset($_POST['create_brand'])) {
   </div>';
     } else {
 
-        $insert_query = "INSERT INTO brand (brand_title,brand_description,CoconutProcessorName) VALUES ('$brand_name','$brand_description','$company_name')";
+        $insert_query = "INSERT INTO brand (brand_title,brand_description,company_name) VALUES ('$brand_name','$brand_description','$company_name')";
         $result = mysqli_query($con, $insert_query);
 
         if ($result) {
@@ -76,30 +92,66 @@ if (isset($_POST['create_brand'])) {
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
-                                        <tr>
+                                        <tr class="text-center">
 
                                             <th>ID</th>
                                             <th>Name</th>
                                             <th>Description</th>
-                                            <th>Slug</th>
-                                            <th class="text-center">Edit</th>
-                                            <th class="text-center">Delete</th>
+
+
+                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <?php
 
-                                            <td>21</td>
-                                            <td><b>Men clothes</b></td>
-                                            <td>Men clothes</td>
-                                            <td>/men</td>
-                                            <td class="text-center">
-                                                <a><i class="bi bi-brush-fill"></i></a>
-                                            </td>
-                                            <td class="text-center">
-                                                <a> <i class="bi bi-trash"></i></a>
-                                            </td>
-                                        </tr>
+
+                                        $ip = getIPAddress();
+
+                                        $admin_query = "select * from `admin_info` where admin_ip_address='$ip'";
+
+                                        $result = mysqli_query($con, $admin_query);
+                                        while ($row = mysqli_fetch_array($result)) {
+
+                                            $company_names = $row['company_name'];
+                                            $select_products = "select * from `brand` where company_name='$company_names'";
+                                            $result_product = mysqli_query($con, $select_products);
+                                            while ($row_brand = mysqli_fetch_array($result_product)) {
+
+                                                $brand_titles = $row_brand['brand_title'];
+                                                $brand_id = $row_brand['brand_id'];
+                                                $brand_descriptions = $row_brand['brand_description'];
+
+
+                                                echo " <tr class='text-center'>
+
+                                                <td>$brand_id</td>
+                                                <td><b>$brand_titles</b></td>
+                                                <td>$brand_descriptions</td>
+                                            
+                                            <form action='' method ='get'  > 
+                                                <td class='text-center'>
+                                                    <a href='brands.php?current_brand_id=$brand_id' name='current_brand_id' > <i class='fa-solid fa-trash'></i></a>
+                                                </td>
+                                            </form>
+                                            </tr>";
+
+                                                if (isset($_GET['current_brand_id'])) {
+                                                    $current_brand_id = $_GET['current_brand_id'];
+                                                    $delete_query = "delete from `brand` where brand_id = $current_brand_id";
+                                                    $result_delete = mysqli_query($con, $delete_query);
+
+                                                    echo '<script> window.open("brands.php","_self")  </script>';
+                                                }
+                                            }
+                                        }
+
+
+
+                                        ?>
+
+
+
 
                                     </tbody>
                                 </table>

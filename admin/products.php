@@ -1,5 +1,20 @@
 <?php include '../includes/connect.php';
-
+function getIPAddress()
+{
+    //whether ip is from the share internet  
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    }
+    //whether ip is from the proxy  
+    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+    //whether ip is from the remote address  
+    else {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+}
 if (isset($_POST['insert_product'])) {
 
     $product_title = $_POST['product_title'];
@@ -247,8 +262,107 @@ if (isset($_POST['insert_product'])) {
 
     </section>
 
+    <div class="container p-5">
+        <div class="pb-5 pt-5">
+            <h1 class="fw-bolder text-center">~ Cart ~</h1>
 
+        </div>
+
+        <div class="row ">
+
+            <table class="table  text-center">
+                <thead>
+
+                    <tr>
+                        <th> Product Id</th>
+                        <th> Product Name</th>
+                        <th> Product Image</th>
+                        <th> Product Description</th>
+                        <th> Delete</th>
+
+
+
+
+
+                    </tr>
+
+
+
+                </thead>
+                <tbody>
+
+                    <?php
+                    $ip = getIPAddress();
+
+                    $admin_query = "select * from `admin_info` where admin_ip_address='$ip'";
+
+                    $result = mysqli_query($con, $admin_query);
+                    while ($row = mysqli_fetch_array($result)) {
+
+                        $company_names = $row['company_name'];
+                        $select_brands = "select * from `brand` where company_name='$company_names'";
+                        $result_brands = mysqli_query($con, $select_brands);
+                        while ($row_brand = mysqli_fetch_array($result_brands)) {
+
+
+                            $brand_id = $row_brand['brand_id'];
+
+                            $select_products = "select * from `biproducts` where brand_id = $brand_id ";
+                            $results_products = mysqli_query($con, $select_products);
+                            while ($row_products = mysqli_fetch_array($results_products)) {
+
+                                $products_id = $row_products['Biproduct_id'];
+                                $products_name = $row_products['BiproductName'];
+                                $products_img1 = $row_products['product_img1'];
+                                $products_description = $row_products['Biproduct_Description'];
+
+
+                                echo " <tr class='text-center'>
+
+                                    <td> $products_id</td>
+                                    <td><b>$products_name</b></td>
+                                    <td><img src='../admin/product_images/$products_img1' alt='' width='70px' height='70px'></td>
+                                    <td> $products_description </td>
+     
+                                   <form action='' method ='get'> 
+                                   <td class='text-center'>
+                                  <a href='products.php?current_product_id=$products_id' name='current_product_id' > <i class='fa-solid fa-trash'></i></a>
+                                  </td>
+                                 </form>
+                                   </tr>";
+                            }
+                        }
+                        if (isset($_GET['current_product_id'])) {
+                            $current_product_id = $_GET['cuurent_product_id'];
+                            $delete_products = "delete from `biproducts` where Biproduct_id=$current_product_id  ";
+                            $delete_query = mysqli_query($con, $delete_products);
+
+                            echo '<script> window.open("products.php","_self")  </script>';
+                        }
+                    }
+                    ?>
+                </tbody>
+
+
+            </table>
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+    </div>
 
 
 </main>
+
+
+
+
 <?php include('../includes/footer.php') ?>

@@ -14,7 +14,7 @@
 
     <div class="row ">
         <form action="" method="post">
-            <table class="table table-bordered border-dark text-center">
+            <table class="table  text-center">
                 <thead>
 
                     <tr>
