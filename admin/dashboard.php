@@ -183,10 +183,10 @@ function getIPAddress()
 
                                                      <td>$user_id</td>
                                                      <td><img src='../login_registration/user_images/$user_image' alt='' width='80px' height='80px' class='rounded-circle'></td>
-                                                     <td><b>$user_name</b></td>
-                                                     <td><b>  $user_email </b></td>
-                                                     <td><b>$user_mobile</b></td>
-                                                     <td><b>$user_address</b></td>
+                                                     <td>$user_name</td>
+                                                     <td>  $user_email </td>
+                                                     <td>$user_mobile</td>
+                                                     <td>$user_address</td>
     
                             
                 ";
@@ -273,11 +273,11 @@ function getIPAddress()
 
                                          <td>$admin_id</td>
                                          <td><img src='../login_registration/admin_images/$admin_image' alt='' width='80px' height='80px' class='rounded-circle'></td>
-                                         <td><b>$admin_name</b></td>
+                                         <td>$admin_name</td>
                                          <td>  $admin_email</td>
                                          <td>  $company_name</td>
                                          <td>  $company_mobile</td>
-                                         <td><b>$company_address</b></td>
+                                         <td>$company_address</td>
                                  ";
                 }
 

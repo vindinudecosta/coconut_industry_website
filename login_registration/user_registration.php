@@ -219,7 +219,7 @@ if (!isset($_SESSION['user_username'])) {
     </main>';
 } else {
 
-    include('user_profile.php');
+    echo '<script> window.open("user_profile.php","_self")  </script>';
 }
 
 ?>

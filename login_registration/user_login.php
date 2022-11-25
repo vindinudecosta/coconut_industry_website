@@ -27,6 +27,7 @@ if (!isset($_SESSION['user_username'])) {
 
         if ($rows_count > 0) {
             $_SESSION['user_username'] = $user_username;
+
             if (password_verify($user_password, $row_data['user_password'])) {
 
 
