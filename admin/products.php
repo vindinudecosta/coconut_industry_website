@@ -264,6 +264,8 @@ if (isset($_POST['insert_product'])) {
 
                         <tr>
                             <th> Product Id</th>
+                            <th> Category Id</th>
+                            <th> Brand Id</th>
                             <th> Product Name</th>
                             <th> Product Image</th>
                             <th> Product Description</th>
@@ -281,34 +283,21 @@ if (isset($_POST['insert_product'])) {
                     <tbody>
 
                         <?php
-                        $ip = getIPAddress();
+                        $select_products = "select * from `biproducts`";
+                        $results_products = mysqli_query($con, $select_products);
+                        while ($row_products = mysqli_fetch_array($results_products)) {
 
-                        $admin_query = "select * from `admin_info` where admin_ip_address='$ip'";
-
-                        $result = mysqli_query($con, $admin_query);
-                        while ($row = mysqli_fetch_array($result)) {
-
-                            $company_names = $row['company_name'];
-                            $select_brands = "select * from `brand` where company_name='$company_names'";
-                            $result_brands = mysqli_query($con, $select_brands);
-                            while ($row_brand = mysqli_fetch_array($result_brands)) {
-
-
-                                $brand_id = $row_brand['brand_id'];
-
-                                $select_products = "select * from `biproducts` where brand_id = $brand_id ";
-                                $results_products = mysqli_query($con, $select_products);
-                                while ($row_products = mysqli_fetch_array($results_products)) {
-
-                                    $products_id = $row_products['Biproduct_id'];
-                                    $products_name = $row_products['BiproductName'];
-                                    $products_img1 = $row_products['product_img1'];
-                                    $products_description = $row_products['Biproduct_Description'];
-
-
-                                    echo " <tr class='text-center'>
+                            $products_id = $row_products['Biproduct_id'];
+                            $products_name = $row_products['BiproductName'];
+                            $products_img1 = $row_products['product_img1'];
+                            $products_description = $row_products['Biproduct_Description'];
+                            $brand_id = $row_products['brand_id'];
+                            $category_id = $row_products['catergory_id'];
+                            echo " <tr class='text-center'>
 
                             <td> $products_id</td>
+                            <td> $category_id</td>
+                            <td> $brand_id</td>
                             <td><b>$products_name</b></td>
                             <td><img src='../admin/product_images/$products_img1' alt='' width='80px' height='80px'></td>
                             <td> $products_description </td>
@@ -319,16 +308,16 @@ if (isset($_POST['insert_product'])) {
                           </td>
                          </form>
                            </tr>";
-                                }
-                            }
-                            if (isset($_GET['current_product_id'])) {
-                                $current_product_id = $_GET['current_product_id'];
-                                $delete_products = "delete from `biproducts` where Biproduct_id=$current_product_id  ";
-                                $delete_query = mysqli_query($con, $delete_products);
-
-                                echo '<script> window.open("products.php","_self")  </script>';
-                            }
                         }
+
+                        if (isset($_GET['current_product_id'])) {
+                            $current_product_id = $_GET['current_product_id'];
+                            $delete_products = "delete from `biproducts` where Biproduct_id=$current_product_id  ";
+                            $delete_query = mysqli_query($con, $delete_products);
+
+                            echo '<script> window.open("products.php","_self")  </script>';
+                        }
+
                         ?>
                     </tbody>
 

@@ -9,7 +9,7 @@
 
 $ip = getIPAddress();
 
-$current_username =  trim($_SESSION['user_username']);
+
 $user_detail_query = "select * from `user_info` where  user_ip_address = '$ip'";
 $run_user_query = mysqli_query($con, $user_detail_query);
 $row_data = mysqli_fetch_array($run_user_query);

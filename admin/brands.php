@@ -97,7 +97,7 @@ if (isset($_POST['create_brand'])) {
                                             <th>ID</th>
                                             <th>Name</th>
                                             <th>Description</th>
-
+                                            <th>Company Name</th>
 
                                             <th>Delete</th>
                                         </tr>
@@ -105,29 +105,22 @@ if (isset($_POST['create_brand'])) {
                                     <tbody>
                                         <?php
 
+                                        $select_products = "select * from `brand`";
+                                        $result_product = mysqli_query($con, $select_products);
+                                        while ($row_brand = mysqli_fetch_array($result_product)) {
 
-                                        $ip = getIPAddress();
-
-                                        $admin_query = "select * from `admin_info` where admin_ip_address='$ip'";
-
-                                        $result = mysqli_query($con, $admin_query);
-                                        while ($row = mysqli_fetch_array($result)) {
-
-                                            $company_names = $row['company_name'];
-                                            $select_products = "select * from `brand` where company_name='$company_names'";
-                                            $result_product = mysqli_query($con, $select_products);
-                                            while ($row_brand = mysqli_fetch_array($result_product)) {
-
-                                                $brand_titles = $row_brand['brand_title'];
-                                                $brand_id = $row_brand['brand_id'];
-                                                $brand_descriptions = $row_brand['brand_description'];
+                                            $brand_titles = $row_brand['brand_title'];
+                                            $brand_id = $row_brand['brand_id'];
+                                            $brand_descriptions = $row_brand['brand_description'];
+                                            $brand_company = $row_brand['company_name'];
 
 
-                                                echo " <tr class='text-center'>
+                                            echo " <tr class='text-center'>
 
                                                 <td>$brand_id</td>
                                                 <td><b>$brand_titles</b></td>
                                                 <td>$brand_descriptions</td>
+                                                <td><b>$brand_company</b></td>
                                             
                                             <form action='' method ='get'  > 
                                                 <td class='text-center'>
@@ -136,15 +129,15 @@ if (isset($_POST['create_brand'])) {
                                             </form>
                                             </tr>";
 
-                                                if (isset($_GET['current_brand_id'])) {
-                                                    $current_brand_id = $_GET['current_brand_id'];
-                                                    $delete_query = "delete from `brand` where brand_id = $current_brand_id";
-                                                    $result_delete = mysqli_query($con, $delete_query);
+                                            if (isset($_GET['current_brand_id'])) {
+                                                $current_brand_id = $_GET['current_brand_id'];
+                                                $delete_query = "delete from `brand` where brand_id = $current_brand_id";
+                                                $result_delete = mysqli_query($con, $delete_query);
 
-                                                    echo '<script> window.open("brands.php","_self")  </script>';
-                                                }
+                                                echo '<script> window.open("brands.php","_self")  </script>';
                                             }
                                         }
+
 
 
 
