@@ -49,7 +49,7 @@ if (isset($_POST['create_brand'])) {
 
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Add, edit or delete Brands</h5>
+
 
                     <!-- General Form Elements -->
                     <div class="row">
@@ -83,7 +83,7 @@ if (isset($_POST['create_brand'])) {
                                             <th>Name</th>
                                             <th>Description</th>
                                             <th>Company Name</th>
-
+                                            <th>Edit</th>
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
@@ -107,9 +107,12 @@ if (isset($_POST['create_brand'])) {
                                                 <td>$brand_descriptions</td>
                                                 <td><b>$brand_company</b></td>
                                             
-                                            <form action='' method ='get'  > 
+                                            <form action='' method ='get'> 
                                                 <td class='text-center'>
-                                                    <a href='brands.php?current_brand_id=$brand_id' name='current_brand_id' > <i class='fa-solid fa-trash'></i></a>
+                                                    <a href='brands_edit.php?current_brands_id=$brand_id' name='current_brand_id' > <i class='fa-solid fa-pen-to-square'></i></a>
+                                                </td>
+                                                 <td class='text-center '>
+                                                    <a href='brands.php?current_brand_id=$brand_id' name='current_brand_id' class='text-danger' > <i class='fa-solid fa-trash'></i></a>
                                                 </td>
                                             </form>
                                             </tr>";

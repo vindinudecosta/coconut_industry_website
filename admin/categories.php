@@ -47,7 +47,6 @@ if (isset($_POST['create_cat'])) {
 
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Add, edit or delete categories</h5>
 
                     <!-- General Form Elements -->
                     <div class="row">
@@ -79,7 +78,7 @@ if (isset($_POST['create_cat'])) {
                         </div>
                         <div class="col-md-9">
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table class="table table-hover text-center">
                                     <thead>
                                         <tr>
 
@@ -87,7 +86,7 @@ if (isset($_POST['create_cat'])) {
                                             <th>Name</th>
                                             <th>Description</th>
 
-                                            <th class="text-center">Delete</th>
+                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
