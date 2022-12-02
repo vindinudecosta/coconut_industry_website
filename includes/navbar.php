@@ -12,6 +12,7 @@
         <div class="col-md-3">
             <div class="card border-dark">
                 <div class="card-body text-center">
+
                     <h5 class="card-title fw-bolder">PRODUCTS</h5>
                     <p class="card-text">Admin can add, edit or delete company products, </p><br>
                     <a href="./products.php" class="btn btn-outline-success">Click here</a>

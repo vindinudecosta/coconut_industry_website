@@ -50,7 +50,7 @@ while ($row = mysqli_fetch_array($result)) {
 if ($result_insert_query) {
 
     echo "<script> alert('your order is submitted')</script>";
-    echo "<script> window.open('../user/cart.php','_self') </script>";
+    echo "<script> window.open('../user/main.php','_self') </script>";
 }
 ?>
 

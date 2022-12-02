@@ -60,9 +60,111 @@
 
 
 </main>
+<div class=" text-center" style="padding:5rem;">
 
+    <div class="container ">
 
-<div class="container-fluid mt-5" style="padding-bottom:5rem;" id="products">
+        <div class="row">
+
+            <div class="col-md-3 col-sm-3">
+
+                <div>
+
+                    <i class="fa fa-check" style="
+   
+   color: #fff;
+   font-size: 35px;
+   border: 3px solid #198754;
+   border-radius: 50%;
+   padding: 20px;
+   background: #198754;
+
+"></i>
+
+                    <h3>Choose a Product</h3>
+
+                    <p>The European languages are members the same family. Their separate existence science </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3 col-sm-3">
+
+                <div>
+
+                    <i class="fa fa-cart-arrow-down" style="
+   
+   color: #fff;
+   font-size: 35px;
+   border: 3px solid #198754;
+   border-radius: 50%;
+   padding: 20px;
+   background: #198754;
+
+"></i>
+
+                    <h3>Add to Cart</h3>
+
+                    <p>The European languages are members the same family. Their separate existence science </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3 col-sm-3">
+
+                <div class="single-process">
+
+                    <i class="fa-solid fa-money-check" style="
+   
+   color: #fff;
+   font-size: 35px;
+   border: 3px solid #198754;
+   border-radius: 50%;
+   padding: 20px;
+   background:#198754;
+
+"></i>
+
+                    <h3>Make Order</h3>
+
+                    <p>The European languages are members the same family. Their separate existence science </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3 col-sm-3">
+
+                <div class="single-process">
+
+                    <i class="fa-solid fa-truck-fast" style="
+   
+   color: #fff;
+   font-size: 35px;
+   border: 3px solid #198754;
+   border-radius: 50%;
+   padding: 20px;
+   background: #198754;
+
+"></i>
+
+                    <h3>Deliver For Free</h3>
+
+                    <p>The European languages are members the same family. Their separate existence science </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container-fluid mt-3" style="padding-bottom:10rem;" id="products">
     <div class=" pt-5">
         <h1 class="fw-bolder text-center">~ Top products ~</h1>
 
